@@ -27,7 +27,7 @@ These rules apply to all platforms related to the viettrace project:
 
 If you observe inappropriate behavior, please submit a report to:
 
-**admin@viettrace.org**  
+**admin@viettrace.org**
 Or contact the GitHub administration channel
 
 All reports will be handled confidentially and seriously.
