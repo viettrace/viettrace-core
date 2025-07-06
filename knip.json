@@ -1,0 +1,82 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/main.ts",
+    "src/**/*.module.ts",
+    "test/**/*.spec.ts",
+    "test/**/*.e2e-spec.ts",
+    "test/**/*.ts"
+  ],
+  "project": ["src/**/*.ts", "test/**/*.ts"],
+  "release-it": {
+    "config": [".release-it.{json,js,cjs,ts,yml,yaml,toml}", "package.json"]
+  },
+  "nest": {
+    "config": ["nest-cli.json", ".nestcli.json", ".nest-cli.json", "nest.json"]
+  },
+  "commitlint": {
+    "config": [
+      "package.json",
+      "package.yaml",
+      ".commitlintrc",
+      ".config/commitlintrc",
+      ".commitlintrc.{json,yaml,yml,js,ts,cjs,mjs,cts}",
+      "commitlint.config.{js,ts,cjs,mjs,cts}",
+      ".config/commitlintrc.{json,yaml,yml,js,ts,cjs,mjs,cts}"
+    ]
+  },
+  "eslint": {
+    "config": [
+      "eslint.config.{js,cjs,mjs,ts,cts,mts}",
+      ".eslintrc",
+      ".eslintrc.{js,json,cjs}",
+      ".eslintrc.{yml,yaml}",
+      "package.json"
+    ]
+  },
+  "jest": {
+    "config": ["jest.config.{js,ts,mjs,cjs,json}", "package.json"],
+    "entry": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)",
+      "**/__mocks__/**/*.[jt]s?(x)"
+    ]
+  },
+  "lefthook": {
+    "config": [
+      "lefthook.yml",
+      ".git/hooks/prepare-commit-msg",
+      ".git/hooks/commit-msg",
+      ".git/hooks/pre-{applypatch,commit,merge-commit,push,rebase,receive}",
+      ".git/hooks/post-{checkout,commit,merge,rewrite}"
+    ]
+  },
+  "lint-staged": {
+    "config": [
+      "package.json",
+      "package.yaml",
+      "package.yml",
+      ".lint-stagedrc",
+      ".config/lint-stagedrc",
+      ".lint-stagedrc.{json,ts,js,cjs,mjs}",
+      "lint-staged.config.{ts,js,cjs,mjs}",
+      ".config/lint-stagedrc.{json,ts,js,cjs,mjs}",
+      ".lintstagedrc",
+      ".config/lintstagedrc",
+      ".lintstagedrc.{json,ts,js,cjs,mjs}",
+      "lintstaged.config.{ts,js,cjs,mjs}",
+      ".config/lintstagedrc.{json,ts,js,cjs,mjs}"
+    ]
+  },
+  "prettier": {
+    "config": [
+      ".prettierrc",
+      ".prettierrc.{json,js,cjs,mjs,ts,cts,mts,yml,yaml,toml,json5}",
+      "prettier.config.{js,cjs,mjs,ts,cts,mts}",
+      "package.{json,yaml}"
+    ]
+  },
+  "typescript": {
+    "config": ["tsconfig.json"]
+  }
+}

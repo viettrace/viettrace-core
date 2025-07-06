@@ -4,8 +4,20 @@ pre-commit:
     lint-staged:
       run: npx lint-staged
       stage_fixed: true
+    knip:
+      run: pnpm knip
+      skip:
+        - merge
+        - rebase
 
 commit-msg:
   commands:
     commitlint:
       run: npx commitlint --edit {1}
+
+pre-push:
+  commands:
+    # tests:
+    #   run: pnpm run test
+    knip:
+      run: pnpm knip:production
