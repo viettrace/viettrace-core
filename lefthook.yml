@@ -2,7 +2,7 @@ pre-commit:
   parallel: true
   commands:
     lint-staged:
-      run: npx lint-staged
+      run: pnpm dlx lint-staged
       stage_fixed: true
     knip:
       run: pnpm knip
@@ -13,7 +13,7 @@ pre-commit:
 commit-msg:
   commands:
     commitlint:
-      run: npx commitlint --edit {1}
+      run: pnpm dlx commitlint --edit {1}
 
 pre-push:
   commands:

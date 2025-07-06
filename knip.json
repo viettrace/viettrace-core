@@ -8,6 +8,10 @@
     "test/**/*.ts"
   ],
   "project": ["src/**/*.ts", "test/**/*.ts"],
+  "ignoreExportsUsedInFile": true,
+  "includeEntryExports": false,
+  "ignoreBinaries": ["nest", "lefthook", "lint-staged", "commitlint"],
+  "ignoreDependencies": ["reflect-metadata","rxjs"],
   "release-it": {
     "config": [".release-it.{json,js,cjs,ts,yml,yaml,toml}", "package.json"]
   },
