@@ -1,6 +1,6 @@
 {
   "name": "viettrace-core",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Core logic for viettrace projects",
   "author": "Lam Tran <lam.tttech19@gmail.com>",
   "license": "MIT",
