@@ -1,30 +1,45 @@
 name: Release
-on:
-  pull_request:
-    types: [closed]
-    branches: [main]
 
 permissions:
   contents: write
+  id-token: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      increment:
+        description: version to increment
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
 
 jobs:
   release:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Git config
+        run: git config user.name "${GITHUB_ACTOR}" && git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.16.0'
-      - name: Set git identity
-        run: git config user.name "${GITHUB_ACTOR}" && git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
       - name: Install pnpm
-        run: npm install -g pnpm@10
-      - name: Install dependencies
-        run: pnpm install
-      - run: pnpm release
+        uses: pnpm/action-setup@v3
+        with:
+          run_install: |
+            - args: [--frozen-lockfile]
+
+      - name: Release
+        run: pnpm release ${{ inputs.increment }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
