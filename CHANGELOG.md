@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>0.1.2 (2025-07-15)</small>
+
+* Chore/integrate db (#11) ([f0a375c](https://github.com/viettrace/viettrace-core/commit/f0a375c)), closes [#11](https://github.com/viettrace/viettrace-core/issues/11)
+
 ## <small>0.1.1 (2025-07-08)</small>
 
 * ci: change auto release workflow to manual (#5) ([623c0ad](https://github.com/viettrace/viettrace-core/commit/623c0ad)), closes [#5](https://github.com/viettrace/viettrace-core/issues/5)
