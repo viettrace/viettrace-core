@@ -63,7 +63,7 @@
     "tsconfig.json": "tsconfig.*.json",
     "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
     ".env": ".env*, .envrc, env.d.ts",
-    "dockerfile*": "docker-compose*, .dockerignore"
+    "Dockerfile": "docker-compose*, .dockerignore, Dockerfile*"
   },
   // Window & Workbench
   "window.autoDetectColorScheme": true,
@@ -186,7 +186,8 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "typescript.preferences.importModuleSpecifier": "non-relative"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
