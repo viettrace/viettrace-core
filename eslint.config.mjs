@@ -38,6 +38,7 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
       'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
