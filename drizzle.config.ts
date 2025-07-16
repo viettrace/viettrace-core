@@ -6,7 +6,7 @@ export default defineConfig({
   out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    url: 'postgres://postgres:admin@127.0.0.1:5432/viettrace',
+    url: 'postgres://username:password@host:port/database',
   },
   migrations: {
     schema: 'public',

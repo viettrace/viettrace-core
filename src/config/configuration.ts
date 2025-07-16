@@ -12,6 +12,8 @@ export default async () => {
     : {
         app: {
           port: parseInt(process.env.PORT || '3000', 10),
+          logLevel: process.env.LOG_LEVEL || 'info',
+          logDir: process.env.LOG_DIR || '',
         },
         db: {
           host: process.env.DB_HOST || 'localhost',

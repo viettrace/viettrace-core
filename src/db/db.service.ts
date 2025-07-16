@@ -1,17 +1,21 @@
-import { Injectable, Logger, OnApplicationShutdown, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnApplicationShutdown, OnModuleInit } from '@nestjs/common';
 import { AppConfigService } from '@src/common/modules/app-config/app-config.service';
+import { Logger } from '@src/common/modules/logger/logger.decorator';
+import { WinstonService } from '@src/common/modules/logger/logger.service';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { PgDatabase } from 'drizzle-orm/pg-core';
 import { Pool } from 'pg';
 
 @Injectable()
 export class DbService implements OnModuleInit, OnApplicationShutdown {
-  private readonly logger = new Logger(DbService.name);
   private pool: Pool;
   private db: PgDatabase<any>;
   private isConnected = false;
 
-  constructor(private readonly appConfigService: AppConfigService) {}
+  constructor(
+    private readonly appConfigService: AppConfigService,
+    @Logger('Database') private readonly logger: WinstonService,
+  ) {}
 
   async onModuleInit() {
     await this.connect();
@@ -23,12 +27,12 @@ export class DbService implements OnModuleInit, OnApplicationShutdown {
 
   private async connect(): Promise<void> {
     try {
-      this.logger.log(`Connecting to database...`);
+      this.logger.info(`Connecting to database...`);
 
       await this.connectPostgres();
 
       this.isConnected = true;
-      this.logger.log(`Successfully connected to database`);
+      this.logger.info(`Successfully connected to database`, DbService.name);
     } catch (error) {
       this.logger.error(`Failed to connect to database: ${error.message}`);
       throw error;
@@ -63,12 +67,12 @@ export class DbService implements OnModuleInit, OnApplicationShutdown {
   private async disconnect(): Promise<void> {
     if (this.pool && this.isConnected) {
       try {
-        this.logger.log('Disconnecting from database...');
+        this.logger.info('Disconnecting from database...');
 
         await this.pool.end();
 
         this.isConnected = false;
-        this.logger.log('Successfully disconnected from database');
+        this.logger.info('Successfully disconnected from database');
       } catch (error) {
         this.logger.error(`Error disconnecting from database: ${error.message}`);
       }
