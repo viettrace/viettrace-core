@@ -1,5 +1,5 @@
 .vscode
-drizzle
+db
 node_modules
 .eslintignore
 eslint.config.mjs
