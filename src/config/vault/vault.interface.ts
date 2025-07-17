@@ -1,6 +1,6 @@
 import { AppEnv, DbEnv } from '@src/shared/interfaces/env.interface';
 
-export type EnvType = Record<string, any> & (AppEnv | DbEnv);
+export type EnvType = Record<string, unknown> & (AppEnv | DbEnv);
 
 interface VaultResponseBase {
   request_id: string;

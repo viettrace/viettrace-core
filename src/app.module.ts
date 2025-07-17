@@ -1,5 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { ApiResponseInterceptor } from '@src/common/interceptors/api-response.interceptor';
+import { RequestLogInterceptor } from '@src/common/interceptors/request-log.interceptor';
+import { TimeoutInterceptor } from '@src/common/interceptors/timeout.interceptor';
 import { AppConfigModule } from '@src/common/modules/app-config/app-config.module';
 import { WinstonModule } from '@src/common/modules/logger/logger.module';
 import configuration from '@src/config/configuration';
@@ -19,6 +23,20 @@ import { AppService } from './modules/app/app.service';
     WinstonModule.forRoot(),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TimeoutInterceptor, // Register the TimeoutInterceptor as a global interceptor
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: RequestLogInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ApiResponseInterceptor,
+    },
+  ],
 })
 export class AppModule {}

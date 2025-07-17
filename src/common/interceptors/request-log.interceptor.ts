@@ -1,0 +1,37 @@
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
+import { Logger } from '@src/common/modules/logger/logger.decorator';
+import { WinstonService } from '@src/common/modules/logger/logger.service';
+import { Request, Response } from 'express';
+import requestIp from 'request-ip';
+import { Observable, tap } from 'rxjs';
+
+@Injectable()
+export class RequestLogInterceptor implements NestInterceptor {
+  constructor(@Logger('Request') private readonly logger: WinstonService) {}
+
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const req = context.switchToHttp().getRequest<Request>();
+    const res = context.switchToHttp().getResponse<Response>();
+
+    const { method, originalUrl, headers, body, params, query } = req;
+    const startTime = Date.now();
+
+    return next.handle().pipe(
+      tap(() => {
+        const duration = Date.now() - startTime;
+
+        this.logger.info(``, {
+          method,
+          url: originalUrl,
+          headers,
+          ip: requestIp.getClientIp(req),
+          body,
+          params,
+          query,
+          statusCode: res.statusCode,
+          durationMs: duration,
+        });
+      }),
+    );
+  }
+}
