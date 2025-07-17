@@ -1,3 +1,4 @@
+import { configurationSchema } from '@src/config/schemas';
 import { VaultService } from '@src/config/vault/vault.service';
 
 export default async () => {
@@ -5,22 +6,25 @@ export default async () => {
     ? {
         ...(await (async () => {
           const vaultService = new VaultService();
+
           const configuration = await vaultService.buildAppConfiguration();
-          return configuration;
+
+          return configurationSchema.parse(configuration);
         })()),
       }
-    : {
+    : configurationSchema.parse({
         app: {
-          port: parseInt(process.env.PORT || '3000', 10),
-          logLevel: process.env.LOG_LEVEL || 'info',
-          logDir: process.env.LOG_DIR || '',
+          port: process.env.PORT,
+          logLevel: process.env.LOG_LEVEL,
+          logDir: process.env.LOG_DIR,
+          swaggerEnabled: process.env.SWAGGER_ENABLED,
         },
         db: {
-          host: process.env.DB_HOST || 'localhost',
-          port: parseInt(process.env.DB_PORT || '5432', 10),
-          username: process.env.DB_USERNAME || 'postgres',
-          password: process.env.DB_PASSWORD || 'postgres',
-          database: process.env.DB_DATABASE || 'viettrace',
+          host: process.env.DB_HOST,
+          port: process.env.DB_PORT,
+          username: process.env.DB_USERNAME,
+          password: process.env.DB_PASSWORD,
+          database: process.env.DB_DATABASE,
         },
-      };
+      });
 };

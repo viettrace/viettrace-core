@@ -8,8 +8,8 @@ import { Pool } from 'pg';
 
 @Injectable()
 export class DbService implements OnModuleInit, OnApplicationShutdown {
-  private pool: Pool;
-  private db: PgDatabase<any>;
+  private pool!: Pool;
+  private db!: PgDatabase<any>;
   private isConnected = false;
 
   constructor(
@@ -32,9 +32,13 @@ export class DbService implements OnModuleInit, OnApplicationShutdown {
       await this.connectPostgres();
 
       this.isConnected = true;
+
       this.logger.info(`Successfully connected to database`, DbService.name);
     } catch (error) {
-      this.logger.error(`Failed to connect to database: ${error.message}`);
+      const errorMsg = error instanceof Error ? error.message : String(error);
+
+      this.logger.error(`Failed to connect to database: ${errorMsg}`);
+
       throw error;
     }
   }
@@ -74,7 +78,11 @@ export class DbService implements OnModuleInit, OnApplicationShutdown {
         this.isConnected = false;
         this.logger.info('Successfully disconnected from database');
       } catch (error) {
-        this.logger.error(`Error disconnecting from database: ${error.message}`);
+        const errorMsg = error instanceof Error ? error.message : String(error);
+
+        this.logger.error(`Error disconnecting from database: ${errorMsg}`);
+
+        throw error;
       }
     }
   }
@@ -101,11 +109,12 @@ export class DbService implements OnModuleInit, OnApplicationShutdown {
         return { status: 'error', message: 'Database not connected' };
       }
 
-      // Test query
       await this.db.execute('SELECT 1');
       return { status: 'ok', message: 'Database connection is healthy' };
     } catch (error) {
-      return { status: 'error', message: error.message };
+      const errorMsg = error instanceof Error ? error.message : String(error);
+
+      return { status: 'error', message: errorMsg };
     }
   }
 }

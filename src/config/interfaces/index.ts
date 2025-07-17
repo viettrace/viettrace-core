@@ -1,7 +1,4 @@
-import { AppConfig } from './app-config.interface';
-import { DbConfig } from './db-config.interface';
+import { configurationSchema } from '@src/config/schemas';
+import z from 'zod';
 
-export interface Configuration {
-  app: AppConfig;
-  db: DbConfig;
-}
+export type Configuration = z.infer<typeof configurationSchema>;
