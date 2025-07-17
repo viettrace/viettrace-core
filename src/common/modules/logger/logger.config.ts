@@ -40,7 +40,7 @@ function buildWinstonConfig(logLevel: string, logDir: string): LoggerOptions {
     level: logLevel,
     transports: [
       new winston.transports.Console({
-        format: format.combine(format.timestamp(), format.splat(), customFormat('console')),
+        format: customFormat('console'),
       }),
       new DailyRotateFile({
         filename: '%DATE%.log',

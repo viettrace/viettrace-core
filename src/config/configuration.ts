@@ -14,10 +14,12 @@ export default async () => {
       }
     : configurationSchema.parse({
         app: {
+          baseUrl: process.env.BASE_URL,
           port: process.env.PORT,
           logLevel: process.env.LOG_LEVEL,
           logDir: process.env.LOG_DIR,
           swaggerEnabled: process.env.SWAGGER_ENABLED,
+          apiTimeoutMs: process.env.API_TIMEOUT_MS,
         },
         db: {
           host: process.env.DB_HOST,
