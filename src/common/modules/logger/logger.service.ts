@@ -1,5 +1,6 @@
 import { Injectable, Scope } from '@nestjs/common';
 import { WinstonInit } from '@src/common/modules/logger/logger-init.service';
+import chalk from 'chalk';
 import { ClsService } from 'nestjs-cls';
 import { Logger } from 'winston';
 
@@ -43,10 +44,10 @@ export class WinstonService {
 
   buildMessage(message: string) {
     const id = this.cls.getId();
-    const requestId = id ? `[Request-ID] ${this.cls.getId()} ` : '';
+    const requestId = id ? `${chalk.green('[Request-ID]')} ${chalk.yellow(this.cls.getId())} ` : '';
 
     if (this.prefix) {
-      return `[${this.prefix}] ${requestId} ${message}`;
+      return `${chalk.green('[' + this.prefix + ']')} ${requestId} ${message}`;
     }
 
     return message;

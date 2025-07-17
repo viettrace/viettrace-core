@@ -32,8 +32,8 @@ const buildTimestampFormat = (info: winston.Logform.TransformableInfo): string =
   return `${datePart}, ${timePart}.${ms}`;
 };
 
-const customFormat = (type: 'console' | 'file') =>
-  format.combine(
+const customFormat = (type: 'console' | 'file') => {
+  const formats = [
     format.timestamp(),
     utilFormatter(),
     format.printf(info => {
@@ -43,11 +43,16 @@ const customFormat = (type: 'console' | 'file') =>
       const level = info.level.toUpperCase();
       const message = info.message as string;
 
-      return type === 'console'
-        ? `${chalk.green(`[${PREFIX_LOG_NAME}]`)} ${chalk.yellow(pid.toString())}  - ${chalk.magenta(timestamp)}     ${chalk.cyan(level)} ${message}`
-        : `[${PREFIX_LOG_NAME}] ${pid}  - ${timestamp}     ${level} ${message}`;
+      return `${chalk.green(`[${PREFIX_LOG_NAME}]`)} ${chalk.yellow(pid.toString())}  - ${chalk.magenta(timestamp)}     ${chalk.cyan(level)} ${message}`;
     }),
-  );
+  ];
+
+  if (type === 'file') {
+    formats.push(format.uncolorize());
+  }
+
+  return format.combine(...formats);
+};
 
 function buildWinstonConfig(logLevel: string, logDir: string): LoggerOptions {
   return {

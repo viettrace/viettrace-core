@@ -27,11 +27,11 @@ import { AppService } from './modules/app/app.service';
     AppService,
     {
       provide: APP_INTERCEPTOR,
-      useClass: TimeoutInterceptor, // Register the TimeoutInterceptor as a global interceptor
+      useClass: RequestLogInterceptor,
     },
     {
       provide: APP_INTERCEPTOR,
-      useClass: RequestLogInterceptor,
+      useClass: TimeoutInterceptor,
     },
     {
       provide: APP_INTERCEPTOR,
