@@ -84,7 +84,7 @@
     "@types/supertest": "^6.0.2",
     "cross-env": "7.0.3",
     "drizzle-kit": "0.31.4",
-    "eslint": "^9.18.0",
+    "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
     "eslint-plugin-unused-imports": "^4.1.4",
