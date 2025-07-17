@@ -1,5 +1,13 @@
 # Changelog
 
+## <small>0.1.3 (2025-07-17)</small>
+
+* fix: logger not print metadata (#15) ([3280520](https://github.com/viettrace/viettrace-core/commit/3280520)), closes [#15](https://github.com/viettrace/viettrace-core/issues/15)
+* chore: change output migration folder of drizzle-kit (#13) ([a0e3106](https://github.com/viettrace/viettrace-core/commit/a0e3106)), closes [#13](https://github.com/viettrace/viettrace-core/issues/13)
+* chore: integrate logger (#12) ([9fa5ae5](https://github.com/viettrace/viettrace-core/commit/9fa5ae5)), closes [#12](https://github.com/viettrace/viettrace-core/issues/12)
+* chore: set up app utilities (#14) ([29f739c](https://github.com/viettrace/viettrace-core/commit/29f739c)), closes [#14](https://github.com/viettrace/viettrace-core/issues/14)
+* Update README.md ([5f75f41](https://github.com/viettrace/viettrace-core/commit/5f75f41))
+
 ## <small>0.1.2 (2025-07-15)</small>
 
 * Chore/integrate db (#11) ([f0a375c](https://github.com/viettrace/viettrace-core/commit/f0a375c)), closes [#11](https://github.com/viettrace/viettrace-core/issues/11)
