@@ -25,11 +25,11 @@ export class RequestLogInterceptor implements NestInterceptor {
           url: originalUrl,
           headers,
           ip: requestIp.getClientIp(req),
-          body,
-          params,
-          query,
+          body: body ? JSON.stringify(body) : null,
+          params: params ? JSON.stringify(params) : null,
+          query: query ? JSON.stringify(query) : null,
           statusCode: res.statusCode,
-          durationMs: duration,
+          durationMs: `${duration}ms`,
         });
       }),
     );
