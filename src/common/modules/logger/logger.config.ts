@@ -1,11 +1,25 @@
 import { PREFIX_LOG_NAME } from '@src/common/modules/logger/logger.constant';
 import chalk from 'chalk';
-import path from 'path';
+import { join } from 'path';
+import { format as utilFormat } from 'util';
 import winston, { format, LoggerOptions } from 'winston';
 import 'winston-daily-rotate-file';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
-const DEFAULT_LOG_DIR: string = path.join(__dirname, '../../../../logs/');
+const DEFAULT_LOG_DIR: string = join(__dirname, '../../../../logs/');
+
+function transform(info: winston.Logform.TransformableInfo) {
+  const args = info[Symbol.for('splat')];
+
+  if (Array.isArray(args) && args?.length) {
+    info.message = utilFormat(info.message, ...args);
+  }
+  return info;
+}
+
+function utilFormatter() {
+  return { transform };
+}
 
 const buildTimestampFormat = (info: winston.Logform.TransformableInfo): string => {
   const now = new Date(info.timestamp as string);
@@ -21,7 +35,7 @@ const buildTimestampFormat = (info: winston.Logform.TransformableInfo): string =
 const customFormat = (type: 'console' | 'file') =>
   format.combine(
     format.timestamp(),
-    format.splat(),
+    utilFormatter(),
     format.printf(info => {
       const pid = process.pid;
       const timestamp = buildTimestampFormat(info);
