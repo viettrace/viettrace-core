@@ -14,22 +14,24 @@ export class RequestLogInterceptor implements NestInterceptor {
     const res = context.switchToHttp().getResponse<Response>();
 
     const { method, originalUrl, headers, body, params, query } = req;
+
+    this.logger.info(``, {
+      method,
+      url: originalUrl,
+      headers,
+      ip: requestIp.getClientIp(req),
+      body: body ? JSON.stringify(body) : null,
+      params: params ? JSON.stringify(params) : null,
+      query: query ? JSON.stringify(query) : null,
+    });
+
     const startTime = Date.now();
 
     return next.handle().pipe(
       tap(() => {
-        const duration = Date.now() - startTime;
-
         this.logger.info(``, {
-          method,
-          url: originalUrl,
-          headers,
-          ip: requestIp.getClientIp(req),
-          body: body ? JSON.stringify(body) : null,
-          params: params ? JSON.stringify(params) : null,
-          query: query ? JSON.stringify(query) : null,
           statusCode: res.statusCode,
-          durationMs: `${duration}ms`,
+          durationMs: `${Date.now() - startTime}ms`,
         });
       }),
     );
