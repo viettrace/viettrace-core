@@ -1,8 +1,9 @@
 import { configurationSchema } from '@src/config/schemas';
 import { VaultService } from '@src/config/vault/vault.service';
+import { NODE_ENV } from '@src/shared/constants/node-env.constant';
 
 export default async () => {
-  return process.env.NODE_ENV === 'production'
+  return process.env.NODE_ENV === NODE_ENV.PRODUCTION
     ? {
         ...(await (async () => {
           const vaultService = new VaultService();

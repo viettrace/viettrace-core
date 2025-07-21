@@ -1,10 +1,11 @@
 // Import with `const Sentry = require("@sentry/nestjs");` if you are using CJS
 import Sentry from '@sentry/nestjs';
 import { nodeProfilingIntegration } from '@sentry/profiling-node';
+import { NODE_ENV } from '@src/shared/constants/node-env.constant';
 import { ObjUtils } from '@src/shared/utils/obj';
 
 const getSampleRate = () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === NODE_ENV.DEVELOPMENT) {
     return 1.0; // 100% for debugging
   }
 
@@ -23,7 +24,7 @@ const getSampleRate = () => {
 };
 
 const getProfileRate = () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === NODE_ENV.DEVELOPMENT) {
     return 1.0; // 100% for debugging
   }
 
