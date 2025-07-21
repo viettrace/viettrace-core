@@ -36,11 +36,8 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # dotenv environment variable files
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+.env*
+!.env.sample
 
 # temp directory
 .temp
@@ -57,3 +54,4 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # eslint cache
 .eslintcache
+metadata.ts
