@@ -1,5 +1,6 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
+import { SentryExceptionCaptured } from '@sentry/nestjs';
 import { WinstonService } from '@src/common/modules/logger/logger.service';
 
 @Catch()
@@ -9,6 +10,7 @@ export class CatchAllExceptionsFilter implements ExceptionFilter {
     private readonly logger: WinstonService,
   ) {}
 
+  @SentryExceptionCaptured()
   catch(exception: unknown, host: ArgumentsHost): void {
     const { httpAdapter } = this.httpAdapterHost;
     const ctx = host.switchToHttp();

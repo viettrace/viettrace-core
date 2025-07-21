@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { SentryModule } from '@sentry/nestjs/setup';
 import { ApiResponseInterceptor } from '@src/common/interceptors/api-response.interceptor';
 import { RequestLogInterceptor } from '@src/common/interceptors/request-log.interceptor';
 import { TimeoutInterceptor } from '@src/common/interceptors/timeout.interceptor';
@@ -13,6 +14,7 @@ import { AppService } from './modules/app/app.service';
 
 @Module({
   imports: [
+    SentryModule.forRoot(),
     ConfigModule.forRoot({
       cache: true,
       load: [configuration],

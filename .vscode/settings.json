@@ -51,6 +51,9 @@
   "editor.parameterHints.enabled": true,
   "editor.hover.delay": 300,
   "editor.hover.sticky": true,
+  "editor.tokenColorCustomizations": {
+    "comments": "#969696"
+  },
   // File Explorer
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,

@@ -1,5 +1,6 @@
 import { PREFIX_LOG_NAME } from '@src/common/modules/logger/logger.constant';
-import chalk from 'chalk';
+import { LogLevel } from '@src/shared/interfaces/log-level.interface';
+import chalk, { ChalkInstance } from 'chalk';
 import { join } from 'path';
 import { format as utilFormat } from 'util';
 import winston, { format, LoggerOptions } from 'winston';
@@ -7,6 +8,16 @@ import 'winston-daily-rotate-file';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
 const DEFAULT_LOG_DIR: string = join(__dirname, '../../../../logs/');
+
+const logLevelColorMapping = new Map<LogLevel, ChalkInstance>([
+  ['error', chalk.hex('#FF3333')],
+  ['warn', chalk.hex('#FFCC00')],
+  ['info', chalk.hex('#4CAF50')],
+  ['http', chalk.hex('#00B4D8')],
+  ['verbose', chalk.hex('#BA68C8')],
+  ['debug', chalk.hex('#2196F3')],
+  ['silly', chalk.hex('#888888')],
+]);
 
 function transform(info: winston.Logform.TransformableInfo) {
   const args = info[Symbol.for('splat')];
@@ -33,6 +44,8 @@ const buildTimestampFormat = (info: winston.Logform.TransformableInfo): string =
 };
 
 const customFormat = (type: 'console' | 'file') => {
+  let chalkInstance: ChalkInstance = chalk.green;
+
   const formats = [
     format.timestamp(),
     utilFormatter(),
@@ -43,7 +56,11 @@ const customFormat = (type: 'console' | 'file') => {
       const level = info.level.toUpperCase();
       const message = info.message as string;
 
-      return `${chalk.green(`[${PREFIX_LOG_NAME}]`)} ${chalk.yellow(pid.toString())}  - ${chalk.magenta(timestamp)}     ${chalk.cyan(level)} ${message}`;
+      if (logLevelColorMapping.has(info.level as LogLevel)) {
+        chalkInstance = logLevelColorMapping.get(info.level as LogLevel) as ChalkInstance;
+      }
+
+      return `${chalk.green(`[${PREFIX_LOG_NAME}]`)} ${chalk.yellow(pid.toString())}  - ${chalk.magenta(timestamp)}     ${chalkInstance(level)} ${message}`;
     }),
   ];
 
