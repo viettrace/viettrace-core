@@ -1,3 +1,5 @@
+import './monitoring/sentry'; // sentry file must be imported at the top of this file
+
 import { ValidationPipe } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { ExpressAdapter, NestExpressApplication } from '@nestjs/platform-express';

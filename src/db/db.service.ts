@@ -26,6 +26,7 @@ export class DbService implements OnModuleInit, OnApplicationShutdown {
   }
 
   private async connect(): Promise<void> {
+    const { database, host } = this.appConfigService.dbConfig;
     try {
       this.logger.info(`Connecting to database...`);
 
@@ -33,7 +34,7 @@ export class DbService implements OnModuleInit, OnApplicationShutdown {
 
       this.isConnected = true;
 
-      this.logger.info(`Successfully connected to database`, DbService.name);
+      this.logger.info(`Successfully connected to database ${database} at host ${host}`);
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : String(error);
 
