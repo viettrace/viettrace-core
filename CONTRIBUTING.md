@@ -34,7 +34,7 @@ pnpm install
 Run app
 
 ```bash
-pnpm dev
+pnpm start:dev
 ```
 
 ### 3. Commit according to standards
