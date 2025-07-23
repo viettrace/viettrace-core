@@ -25,9 +25,17 @@ git checkout -b feature/your-feature-name
 
 ### 2. Set up the development environment
 
-- Web: `cd apps/web && pnpm install && pnpm dev`
-- Mobile: `cd apps/mobile && flutter pub get`
-- API: `cd api && pnpm install && pnpm start:dev`
+Install packages
+
+```bash
+pnpm install
+```
+
+Run app
+
+```bash
+pnpm dev
+```
 
 ### 3. Commit according to standards
 
