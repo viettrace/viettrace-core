@@ -1,14 +1,11 @@
-dev-up:
-	docker-compose -f infra/compose.yml --profile dev up -d
+up:
+	docker-compose -f compose.yml up -d
 
-dev-down:
-	docker-compose -f infra/compose.yml --profile dev down
+down:
+	docker-compose -f compose.yml down
 
-dev-logs:
-	docker-compose -f infra/compose.yml --profile dev logs -f
-
-vault-shell:
-	docker exec -it viettrace-vault sh
+logs:
+	docker-compose -f compose.yml logs -f
 
 ps:
 	docker ps --filter name=viettrace
