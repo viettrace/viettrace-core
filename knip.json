@@ -1,13 +1,12 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
-    "src/main.ts",
-    "src/**/*.module.ts",
+    "src/main.ts!",
     "test/**/*.spec.ts",
     "test/**/*.e2e-spec.ts",
     "test/**/*.ts"
   ],
-  "project": ["src/**/*.ts", "test/**/*.ts"],
+  "project": ["src/**/*.ts!", "test/**/*.ts"],
   "ignoreExportsUsedInFile": true,
   "includeEntryExports": false,
   "ignoreBinaries": ["nest", "lefthook", "lint-staged", "commitlint"],
