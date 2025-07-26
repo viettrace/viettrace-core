@@ -66,7 +66,7 @@
     "tsconfig.json": "tsconfig.*.json",
     "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
     ".env": ".env*, .envrc, env.d.ts",
-    "Dockerfile": "docker-compose*, .dockerignore, Dockerfile*"
+    "Dockerfile": "compose*, .dockerignore, Dockerfile*"
   },
   // Window & Workbench
   "window.autoDetectColorScheme": true,

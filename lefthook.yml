@@ -4,11 +4,6 @@ pre-commit:
     lint-staged:
       run: pnpm dlx lint-staged
       stage_fixed: true
-    knip:
-      run: pnpm knip
-      skip:
-        - merge
-        - rebase
 
 commit-msg:
   commands:
@@ -17,7 +12,5 @@ commit-msg:
 
 pre-push:
   commands:
-    # tests:
-    #   run: pnpm run test
     knip:
       run: pnpm knip:production
