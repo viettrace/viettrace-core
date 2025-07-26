@@ -13,7 +13,12 @@
 
 # import env variables from .env
 set -a
-source ../.env
+# Get the directory of this script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Go up one level to the project root
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+# Source the .env file
+source "$PROJECT_ROOT/.env"
 
 DB_CONTAINER_NAME="$DB_NAME-postgis"
 
@@ -73,7 +78,7 @@ fi
 
 $DOCKER_CMD run -d \
   --name $DB_CONTAINER_NAME \
-  -e POSTGRES_USER="$DB_USER" \
+  -e POSTGRES_USER="$DB_USERNAME" \
   -e POSTGRES_PASSWORD="$DB_PASSWORD" \
   -e POSTGRES_DB="$DB_NAME" \
   -p "$DB_PORT":5432 \
