@@ -41,7 +41,7 @@
     "migrate": "drizzle-kit migrate"
   },
   "dependencies": {
-    "@nestjs/common": "^11.0.1",
+    "@nestjs/common": "^11.1.5",
     "@nestjs/config": "4.0.2",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
