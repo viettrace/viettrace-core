@@ -93,7 +93,7 @@
     "jest": "^30.0.4",
     "knip": "^5.61.3",
     "lefthook": "^1.11.16",
-    "lint-staged": "^16.1.2",
+    "lint-staged": "^16.1.6",
     "prettier": "^3.4.2",
     "release-it": "^19.0.4",
     "source-map-support": "^0.5.21",
